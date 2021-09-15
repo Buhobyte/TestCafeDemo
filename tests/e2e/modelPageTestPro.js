@@ -2,6 +2,8 @@ import Page from './page-model';
 
 import { Selector } from 'testcafe';
 
+// testcafe chrome tests/modelPageTestPro
+
 fixture`My fixture`
     .page`https://devexpress.github.io/testcafe/example/`;
 

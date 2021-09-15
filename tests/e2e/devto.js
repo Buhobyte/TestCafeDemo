@@ -1,21 +1,32 @@
 import { Selector } from 'testcafe';
+import DevAboutPage from './page/devaboutpage';
+import DevDiscussTagPage from './page/devdiscusstagpage';
+import DevHomePage from './page/DevHomePage';
 
-// testcafe chrome tests/e2e/DeviceMotionEvent.js
+// testcafe chrome tests/e2e/devto.js
+
+const devaboutpage = new DevAboutPage();
+const devhomepage = new DevHomePage();
+const devdiscusstagpage = new DevDiscussTagPage();
 
 fixture('DEV Tests')
     .page('http://dev.to/');
 
 test("Check founder's names", async (t) => {
-    const aboutLink = Selector('#sidebar-wrapper-left > aside > nav.mb-6.mt-4 > ul > li:nth-child(10) > a')
-    const firstFounder = Selector('a').withText('Ben Halpern');
-    const secondFounder = Selector('a').withText('Jess Lee');
-    const thirdFounder = Selector('a').withText('Peter Frank');
 
     await t
-        .setTestSpeed(0.3)
-        .click(aboutLink)
-        .expect(firstFounder.exists).ok()
-        .expect(secondFounder.exists).ok()
-        .expect(thirdFounder.exists).ok()
+        .setTestSpeed(1)
+        .click(devhomepage.aboutLink)
+        .expect(devaboutpage.firstFounder.exists).ok()
+        .expect(devaboutpage.secondFounder.exists).ok()
+        .expect(devaboutpage.thirdFounder.exists).ok()
 
+});
+
+test("Search for posts about testing", async (t) => {
+    const discussTitle = Selector('h1').withText('Discussion');
+
+    await t
+        .click(devhomepage.discussTag)
+        .expect(devdiscusstagpage.discussTitle.exists).ok();
 });
